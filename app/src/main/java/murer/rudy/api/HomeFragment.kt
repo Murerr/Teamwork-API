@@ -40,6 +40,8 @@ class HomeFragment : Fragment() {
                 uiThread {
                     if (weakRef.get()!= null && userdata != null) {
                         displayUserData(userdata)
+                        model.setURLInPreferences(userdata.URL)
+                        BASEURL = userdata.URL
                     }
                     showProgress(false)
                 }
@@ -61,17 +63,20 @@ class HomeFragment : Fragment() {
         val username = "twp_s0ZgGXeXvZ0AUcU1HFnF5uLYdeAe" //text_username.text.toString()
         val password = "7417RudyM"//text_password.text.toString()
         val basicAuth = "Basic " + Base64.encodeToString(("$username:$password").toByteArray(), Base64.NO_WRAP)
+        model.setUserDataInPrefences(basicAuth)
+        BASICAUTH = basicAuth
         return model.getUserData(basicAuth)
 
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     private fun showProgress(show: Boolean) {
         progressbar.visibility = if (show) View.VISIBLE else View.GONE
         mscrollview.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    companion object {
+        lateinit var BASEURL: String
+        lateinit var BASICAUTH: String
     }
 
 }

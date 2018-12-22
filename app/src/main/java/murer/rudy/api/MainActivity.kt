@@ -2,15 +2,12 @@ package murer.rudy.api
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -18,10 +15,10 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_home -> {
                 return@OnNavigationItemSelectedListener (loadFragment(HomeFragment()))
             }
-            /*R.id.navigation_projects -> {
-                return@OnNavigationItemSelectedListener (loadFragment(ListFragment()))
+            R.id.navigation_projects -> {
+                return@OnNavigationItemSelectedListener (loadFragment(ProjectFragment()))
             }
-            R.id.navigation_tasks -> {
+            /*R.id.navigation_tasks -> {
                 return@OnNavigationItemSelectedListener (loadFragment(NotificationFragment()))
             }*/
         }
@@ -53,10 +50,6 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return false
-    }
-
-    private fun authentificateUser(){
-        //val userName =
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
