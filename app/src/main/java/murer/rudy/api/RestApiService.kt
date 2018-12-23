@@ -55,4 +55,4 @@ data class UserData(var STATUS: String, var account: AccountData)
 data class AccountData(var firstname: String?, var URL: String, var lastname:String?, var userId:String?, var id:String?)
 
 data class Projects(var STATUS:String,var projects: List<ProjectsFields>)
-data class ProjectsFields(var id: String, var name: String, var description: String, var logo:String)
+data class ProjectsFields(var id: String, var name: String, var description: String, var logo:String,var starred:Boolean)

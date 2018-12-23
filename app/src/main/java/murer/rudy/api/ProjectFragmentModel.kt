@@ -47,7 +47,9 @@ class ProjectFragmentModelImpl(
                             description = it.description,
                             id = it.id,
                             name = it.name,
-                            logo = it.logo
+                            logo = it.logo,
+                            starred = it.starred
+
                         )
                     }
                 }

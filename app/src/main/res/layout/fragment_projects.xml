@@ -10,8 +10,6 @@
             style="@android:style/Widget.Material.ScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
             android:fillViewport="true"
             android:overScrollMode="never"
             android:paddingBottom="56dp"
@@ -21,30 +19,35 @@
             tools:ignore="PrivateResource">
 
         <LinearLayout
-                android:id="@+id/form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="?android:listDivider"
-                android:dividerPadding="16dp"
-                android:orientation="vertical"
-                android:showDividers="none">
+            android:id="@+id/form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="?android:listDivider"
+            android:dividerPadding="16dp"
+            android:orientation="vertical"
+            android:showDividers="none">
 
                 <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scrollbars="vertical"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
     </ScrollView>
 
+
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="56dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
         <ProgressBar
                 android:id="@+id/progressbar"
@@ -57,9 +60,22 @@
                 android:indeterminateTint="@color/colorPrimary"
                 android:max="100"
                 android:visibility="gone"
-                android:layout_marginBottom="56dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                app:backgroundTint="@color/colorPrimary"
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_round_add_24px"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
 
     </android.support.constraint.ConstraintLayout>

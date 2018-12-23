@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.fragment_projects.*
 import murer.rudy.api.HomeFragment.Companion.BASICAUTH
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import android.support.v7.widget.DividerItemDecoration
+
+
 
 
 class ProjectFragment : Fragment(),ProjectsFieldsAdapterListener {
@@ -54,6 +57,7 @@ class ProjectFragment : Fragment(),ProjectsFieldsAdapterListener {
         recycler_view.layoutManager = LinearLayoutManager(activityContext)
         recycler_view.setHasFixedSize(true)
         recycler_view.adapter = null
+        recycler_view.addItemDecoration(DividerItemDecoration(recycler_view.context, DividerItemDecoration.VERTICAL))
     }
 
     override fun showProject(projectsFields: ProjectsFields) {
