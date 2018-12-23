@@ -1,33 +1,36 @@
 package murer.rudy.api
 
 
-import android.net.wifi.hotspot2.pps.Credential
+import murer.rudy.api.HomeFragment.Companion.BASEURL
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
-import android.net.wifi.hotspot2.pps.Credential.UserCredential
-import retrofit2.http.POST
-
 
 
 
 interface RestApiService {
     companion object {
-        val instance: RestApiService by lazy {
-            val httpClient = OkHttpClient.Builder().build()
+        val httpClient = OkHttpClient.Builder().build()
+        val login: RestApiService by lazy {
 
             Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     //.baseUrl("https://api.teamwork.com/")
-                    .baseUrl( "https://authenticate.teamwork.com/")
+                    .baseUrl( "https://api.teamwork.com/")
                     .client(httpClient)
                     .build()
                     .create(RestApiService::class.java)
+        }
+        val instance: RestApiService by lazy {
+            Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BASEURL)
+                .client(httpClient)
+                .build()
+                .create(RestApiService::class.java)
         }
 
     }
@@ -43,11 +46,13 @@ interface RestApiService {
     @GET("authenticate.json") // authentification
     fun getUserInfo(@Header("Authorization") basicAuth: String): Call<UserData>
 
-    /*@GET("authenticate.json") // authentification
-    fun getUserInfo(@Header("Authorization") basicAuth: BasicAuth): Call<UserData>*/
+    @GET("projects.json") // authentification
+    fun getProjectsInfo(@Header("Authorization") basicAuth: String): Call<Projects>
 
 }
 
-data class BasicAuth(var username: String, var password: String)
 data class UserData(var STATUS: String, var account: AccountData)
-data class AccountData(var firstname: String?, var URL: String?, var lastname:String?, var userId:String?, var id:String?)
+data class AccountData(var firstname: String?, var URL: String, var lastname:String?, var userId:String?, var id:String?)
+
+data class Projects(var STATUS:String,var projects: List<ProjectsFields>)
+data class ProjectsFields(var id: String, var name: String, var description: String, var logo:String,var starred:Boolean)
