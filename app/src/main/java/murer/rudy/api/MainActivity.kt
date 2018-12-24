@@ -10,6 +10,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import murer.rudy.api.home.HomeFragment
 import murer.rudy.api.project.ProjectFragment
+import murer.rudy.api.task.TaskFragment
 
 class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -20,9 +21,9 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_projects -> {
                 return@OnNavigationItemSelectedListener (loadFragment(ProjectFragment()))
             }
-            /*R.id.navigation_tasks -> {
+            R.id.navigation_tasks -> {
                 return@OnNavigationItemSelectedListener (loadFragment(TaskFragment()))
-            }*/
+            }
         }
         false
     }

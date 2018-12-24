@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.projects_list_row.view.*
 import kotlinx.android.synthetic.main.recent_activities_list_row.view.*
+import kotlinx.android.synthetic.main.tasks_list_row.view.*
 import murer.rudy.api.project.ItemAdapterListener
 
 
@@ -72,21 +74,33 @@ class CustomAdapter(private val results: List<Item>, private val listener: ItemA
 
                     item_name_recentActivities.text = item.recentActivity!!.description
                     item_from_recentActivities.text = item.recentActivity!!.fromusername
-                    val datetime = item.recentActivity!!.datetime
-                    item_datetime_recentActivities.text = datetime.removeRange(10,datetime.length)
+                    item_datetime_recentActivities.text = convertToDateTime(item.recentActivity!!.datetime)
                 }
                 ItemType.Task ->{
-
+                    if (item.task!!.avatar !=""){
+                        glidewith(item_picture_task,item.task!!.avatar)
+                    } else {
+                        glidewith(item_picture_task,R.drawable.ic_round_format_list_bulleted_24px)
+                    }
+                    item_name_task.text = item.task!!.content
+                    item_description_task.text = item.task!!.projectName
+                    item_datetime_task.text = convertToDateTime(item.task!!.createdOn)
                 }
             }
 
 
         }
 
+        private fun convertToDateTime(datetime: String) = datetime.removeRange(10, datetime.length)
+
         private fun glidewith(imageView: ImageView, drawablePath: Any) {
+            val cropOptions = RequestOptions
+                .circleCropTransform()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+
             Glide.with(imageView)
                 .load(drawablePath)
-                .apply(RequestOptions().circleCrop().centerCrop().centerInside())
+                .apply(cropOptions)
                 .into(imageView)
         }
     }

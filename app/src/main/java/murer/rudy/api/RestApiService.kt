@@ -1,6 +1,8 @@
 package murer.rudy.api
 
 
+import com.google.gson.annotations.JsonAdapter
+import com.google.gson.annotations.SerializedName
 import murer.rudy.api.authentication.LoginActivity.Companion.BASEURL
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -44,6 +46,9 @@ interface RestApiService {
     @GET("latestActivity.json") // authentification
     fun getLatestActivities(@Header("Authorization") basicAuth: String): Call<ActivityRequest>
 
+    @GET("tasks.json") // authentification
+    fun getTasks(@Header("Authorization") basicAuth: String): Call<TaskRequest>
+
 }
 
 data class UserData(var STATUS: String, var account: AccountData)
@@ -59,5 +64,12 @@ data class Project(var id: String, var name: String, var description: String, va
 data class ActivityRequest(var STATUS:String,var activity: List<RecentActivity>)
 data class RecentActivity(var id: String, var activitytype: String, var description: String,var type:String, var fromusername:String, var datetime:String)
 
-data class TaskRequest(var STATUS:String,var activity: List<RecentActivity>)
-data class Task(var id: String, var activitytype: String, var description: String, var extradescription:String, var type:String, var fromusername:String)
+
+data class TaskRequest(var STATUS:String,@SerializedName("todo-items") var todoItems:List<Task>)
+data class Task(var id: String,
+                @SerializedName("creator-avatar-url") var avatar:String,
+                @SerializedName("project-name") var projectName:String,
+                @SerializedName("created-on")var createdOn:String,
+                var content:String
+                )
+
