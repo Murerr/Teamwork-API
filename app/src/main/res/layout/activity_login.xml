@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ScrollView
+            android:id="@+id/mscrollview"
+            style="@android:style/Widget.Material.ScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingBottom="56dp"
+            android:scrollbars="horizontal"
+            android:visibility="visible"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:ignore="PrivateResource">
+
+        <LinearLayout
+                android:id="@+id/form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:divider="?android:listDivider"
+                android:dividerPadding="16dp"
+                android:orientation="vertical"
+                android:showDividers="none">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/tile_login"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorPrimary" />
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:iconSignifier="@drawable/ic_round_account_circle_24px"
+                    app:labelText="@string/username"
+                    app:primaryColor="@color/colorPrimary">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/text_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textAutoComplete" />
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:iconSignifier="@drawable/ic_round_vpn_key_24px"
+                    app:labelText="@string/password"
+                    app:primaryColor="@color/colorPrimary">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/text_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <Button
+                    android:id="@+id/login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/colorPrimary"
+            />
+            <TextView
+                    android:id="@+id/textview_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+            />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+        <ProgressBar
+                android:id="@+id/progressbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="center"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/colorPrimary"
+                android:max="100"
+                android:visibility="gone"
+                android:layout_marginBottom="56dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+
+</RelativeLayout>
+
+
+
+
+
+
+

@@ -8,6 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import murer.rudy.api.home.HomeFragment
+import murer.rudy.api.project.ProjectFragment
 
 class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -28,8 +30,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var model: MainActivityModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         if (!this::model.isInitialized) {
             model = MainActivityModel.newInstance(this)
         }

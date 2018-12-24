@@ -1,7 +1,7 @@
 package murer.rudy.api
 
 
-import murer.rudy.api.HomeFragment.Companion.BASEURL
+import murer.rudy.api.authentication.LoginActivity.Companion.BASEURL
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -35,24 +35,29 @@ interface RestApiService {
 
     }
 
-    /*@GET("authenticate.json") // authentification
-    fun getUserInfo(Username: String, Password: String): Call<UserData>*/
-
-    /*@GET("authenticate.json") // authentification
-    fun getUserInfo(@Header("Authorization") basicAuth: String, @Body userCred: String): Call<UserData>*/
-
-    //"Authorization", "Basic dHdwX3MwWmdHWGVYdlowQVVjVTFIRm5GNXVMWWRlQWU6NzQxN1J1ZHlN"
-
     @GET("authenticate.json") // authentification
     fun getUserInfo(@Header("Authorization") basicAuth: String): Call<UserData>
 
     @GET("projects.json") // authentification
-    fun getProjectsInfo(@Header("Authorization") basicAuth: String): Call<Projects>
+    fun getProjectsInfo(@Header("Authorization") basicAuth: String): Call<ProjectRequest>
+
+    @GET("latestActivity.json") // authentification
+    fun getLatestActivities(@Header("Authorization") basicAuth: String): Call<ActivityRequest>
 
 }
 
 data class UserData(var STATUS: String, var account: AccountData)
 data class AccountData(var firstname: String?, var URL: String, var lastname:String?, var userId:String?, var id:String?)
 
-data class Projects(var STATUS:String,var projects: List<ProjectsFields>)
-data class ProjectsFields(var id: String, var name: String, var description: String, var logo:String,var starred:Boolean)
+enum class ItemType { RecentActivity, Project, Task }
+data class Item(val type: ItemType,
+                var recentActivity: RecentActivity? = null, var project: Project? = null,  var Task: Task? = null)
+
+data class ProjectRequest(var STATUS:String, var projects: List<Project>)
+data class Project(var id: String, var name: String, var description: String, var logo:String, var starred:Boolean)
+
+data class ActivityRequest(var STATUS:String,var activity: List<RecentActivity>)
+data class RecentActivity(var id: String, var activitytype: String, var description: String, var extradescription:String, var type:String, var fromusername:String)
+
+data class TaskRequest(var STATUS:String,var activity: List<RecentActivity>)
+data class Task(var id: String, var activitytype: String, var description: String, var extradescription:String, var type:String, var fromusername:String)

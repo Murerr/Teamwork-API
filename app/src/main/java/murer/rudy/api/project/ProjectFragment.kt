@@ -1,23 +1,25 @@
-package murer.rudy.api
+package murer.rudy.api.project
 
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_projects.*
-import murer.rudy.api.HomeFragment.Companion.BASICAUTH
+import murer.rudy.api.CustomAdapter
+import murer.rudy.api.Item
+import murer.rudy.api.R
+import murer.rudy.api.authentication.LoginActivity.Companion.BASEAUTH
+
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import android.support.v7.widget.DividerItemDecoration
 
 
-
-
-class ProjectFragment : Fragment(),ProjectsFieldsAdapterListener {
+class ProjectFragment : Fragment(), ItemAdapterListener {
 
     private lateinit var activityContext: Context
     private lateinit var model: ProjectFragmentModel
@@ -37,14 +39,11 @@ class ProjectFragment : Fragment(),ProjectsFieldsAdapterListener {
         if (!this::model.isInitialized) {
             model = ProjectFragmentModel.newInstance(activityContext)
         }
-        if (BASICAUTH == ""){
-            BASICAUTH = model.getBasicAuth()
-        }
-        setRecyclerView()
 
+        setRecyclerView()
         showProgress(true)
         doAsync {
-            val projectsList = model.getProjectInfos(BASICAUTH)
+            val projectsList = model.getProjectInfos(getBasicAuth())
             Log.d("ProjectList",projectsList.toString())
             uiThread {
                 displayItems(projectsList)
@@ -60,13 +59,14 @@ class ProjectFragment : Fragment(),ProjectsFieldsAdapterListener {
         recycler_view.addItemDecoration(DividerItemDecoration(recycler_view.context, DividerItemDecoration.VERTICAL))
     }
 
-    override fun showProject(projectsFields: ProjectsFields) {
-
+    private fun getBasicAuth(): String {
+        return BASEAUTH
     }
 
-    private fun displayItems(items: List<ProjectsFields>) {
-        recycler_view.adapter = ProjectsFieldsAdapter(items,this)
-        (recycler_view.adapter as ProjectsFieldsAdapter).notifyDataSetChanged()
+    private fun displayItems(items: List<Item>) {
+        recycler_view.adapter = CustomAdapter(items, this)
+        recycler_view.adapter!!.notifyDataSetChanged()
+        //(recycler_view.adapter as CustomAdapter).notifyDataSetChanged()
     }
 
     private fun showProgress(show: Boolean) {
@@ -74,12 +74,13 @@ class ProjectFragment : Fragment(),ProjectsFieldsAdapterListener {
         mscrollview.visibility = if (show) View.GONE else View.VISIBLE
     }
 
+    override fun showProject(item: Item) {
 
-
+    }
 
 }
-interface ProjectsFieldsAdapterListener {
-    fun showProject(projectsFields: ProjectsFields)
+interface ItemAdapterListener {
+    fun showProject(item: Item)
 
 }
 

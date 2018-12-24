@@ -8,4 +8,5 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="name">Image</string>
+    <string name="tile_login">Login with Teamwork API</string>
 </resources>
