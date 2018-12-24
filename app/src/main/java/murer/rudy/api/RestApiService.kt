@@ -51,13 +51,13 @@ data class AccountData(var firstname: String?, var URL: String, var lastname:Str
 
 enum class ItemType { RecentActivity, Project, Task }
 data class Item(val type: ItemType,
-                var recentActivity: RecentActivity? = null, var project: Project? = null,  var Task: Task? = null)
+                var recentActivity: RecentActivity? = null, var project: Project? = null,  var task: Task? = null)
 
 data class ProjectRequest(var STATUS:String, var projects: List<Project>)
 data class Project(var id: String, var name: String, var description: String, var logo:String, var starred:Boolean)
 
 data class ActivityRequest(var STATUS:String,var activity: List<RecentActivity>)
-data class RecentActivity(var id: String, var activitytype: String, var description: String, var extradescription:String, var type:String, var fromusername:String)
+data class RecentActivity(var id: String, var activitytype: String, var description: String,var type:String, var fromusername:String, var datetime:String)
 
 data class TaskRequest(var STATUS:String,var activity: List<RecentActivity>)
 data class Task(var id: String, var activitytype: String, var description: String, var extradescription:String, var type:String, var fromusername:String)

@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener (loadFragment(ProjectFragment()))
             }
             /*R.id.navigation_tasks -> {
-                return@OnNavigationItemSelectedListener (loadFragment(NotificationFragment()))
+                return@OnNavigationItemSelectedListener (loadFragment(TaskFragment()))
             }*/
         }
         false

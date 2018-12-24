@@ -1,34 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <LinearLayout
+
+
+        <LinearLayout
+                android:id="@+id/form"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="?android:listDivider"
+                android:dividerPadding="16dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="56dp"
+                android:showDividers="none">
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="?android:attr/actionBarSize"
-            android:orientation="vertical">
-        <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/title_projects"
-                android:textColor="@color/colorPrimary"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="56dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
         <ProgressBar
                 android:id="@+id/progressbar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:foregroundGravity="center"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:indeterminate="true"
-                android:indeterminateTint="@color/colorAccent"
+                android:indeterminateTint="@color/colorPrimary"
+                android:max="100"
                 android:visibility="gone"
-                android:max="100" />
-    </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                app:backgroundTint="@color/colorPrimary"
+                android:tint="@color/white"
+                app:srcCompat="@drawable/ic_round_add_24px"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
 
 </RelativeLayout>
+
+
+
+
 
 
 
